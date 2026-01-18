@@ -1,0 +1,239 @@
+/* Nord Theme Palette */
+:root {
+    --color-bg: #2E3440;
+    --color-surface: #3B4252;
+    --color-elevated: #434C5E;
+    --color-border: #4C566A;
+    --color-text: #ECEFF4;
+    --color-text-muted: #D8DEE9;
+    --color-accent-blue: #88C0D0;
+    --color-accent-cyan: #8FBCBB;
+    --color-accent-green: #A3BE8C;
+    --color-warning: #EBCB8B;
+    --color-danger: #BF616A;
+    --color-purple: #B48EAD;
+    --color-orange: #D08770;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.35);
+
+    /* Font */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Global Resets */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text);
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+p {
+    color: var(--color-text-muted);
+}
+
+a {
+    color: var(--color-accent-blue);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--color-accent-cyan);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent-blue);
+}
+
+/* Selection */
+::selection {
+    background: var(--color-accent-blue);
+    color: var(--color-bg);
+}
+
+/* Focus States */
+:focus-visible {
+    outline: 2px solid var(--color-accent-blue);
+    outline-offset: 2px;
+}
+
+/* Buttons */
+button {
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    border: none;
+    background: var(--color-surface);
+    color: var(--color-text);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background: var(--color-elevated);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Code */
+code,
+pre {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    background: var(--color-bg);
+    border-radius: 6px;
+}
+
+code {
+    padding: 0.15rem 0.4rem;
+}
+
+pre {
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+/* Cards */
+.card {
+    background: var(--color-surface);
+    border: 1px solid rgba(136, 192, 208, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    border-color: rgba(136, 192, 208, 0.2);
+    box-shadow: var(--shadow-md);
+}
+
+/* Glass Effect */
+.glass {
+    background: rgba(59, 66, 82, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(136, 192, 208, 0.1);
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 5px var(--color-accent-blue);
+    }
+
+    50% {
+        box-shadow: 0 0 20px var(--color-accent-blue);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.animate-slideIn {
+    animation: slideIn 0.3s ease forwards;
+}

@@ -1,0 +1,397 @@
+.attribution {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.headerLeft h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.headerLeft p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+}
+
+/* Main Grid */
+.mainGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .mainGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card,
+.profileCard {
+    background: var(--color-surface);
+    border: 1px solid rgba(136, 192, 208, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 1.25rem;
+    background: var(--color-bg);
+    border-bottom: 1px solid rgba(136, 192, 208, 0.1);
+    color: var(--color-accent-blue);
+}
+
+.cardHeader h2 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* Profile Card */
+.profileContent {
+    padding: 1.25rem;
+}
+
+.profileRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(136, 192, 208, 0.05);
+}
+
+.profileRow:last-of-type {
+    border-bottom: none;
+}
+
+.label {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.value {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-text);
+}
+
+.value code {
+    padding: 0.2rem 0.5rem;
+    background: var(--color-bg);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+}
+
+.copyBtn {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+    color: var(--color-text-muted);
+}
+
+.copyBtn:hover {
+    color: var(--color-accent-blue);
+}
+
+.detectionBadges {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.detectionBadge {
+    padding: 0.35rem 0.75rem;
+    background: rgba(191, 97, 106, 0.15);
+    color: var(--color-danger);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* IP List */
+.ipList {
+    padding: 0.5rem;
+}
+
+.ipItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: var(--color-bg);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.ipItem.active {
+    border-left: 3px solid var(--color-danger);
+}
+
+.ipItem.inactive {
+    opacity: 0.6;
+}
+
+.ipInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ipInfo code {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-text);
+}
+
+.ipType {
+    padding: 0.2rem 0.5rem;
+    background: rgba(136, 192, 208, 0.15);
+    color: var(--color-accent-blue);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.ipMeta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ipCountry {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.ipStatus {
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.ipStatus.active {
+    background: rgba(191, 97, 106, 0.15);
+    color: var(--color-danger);
+}
+
+.ipStatus.inactive {
+    background: rgba(136, 192, 208, 0.1);
+    color: var(--color-text-muted);
+}
+
+/* Tool List */
+.toolList {
+    padding: 1rem 1.25rem;
+}
+
+.toolItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(136, 192, 208, 0.05);
+}
+
+.toolInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.toolName {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.toolCategory {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.confidenceBar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 150px;
+}
+
+.confidenceBar span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-accent-blue);
+    min-width: 40px;
+}
+
+.confidenceProgress {
+    flex: 1;
+    height: 6px;
+    background: linear-gradient(90deg, var(--color-accent-green), var(--color-warning));
+    border-radius: 3px;
+}
+
+/* Behavior List */
+.behaviorList {
+    padding: 1rem 1.25rem 1rem 2rem;
+    margin: 0;
+}
+
+.behaviorList li {
+    padding: 0.5rem 0;
+    color: var(--color-text);
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(136, 192, 208, 0.05);
+}
+
+/* AI Section */
+.aiSection {
+    background: linear-gradient(135deg, rgba(136, 192, 208, 0.1), rgba(180, 142, 173, 0.1));
+    border: 1px solid rgba(136, 192, 208, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.aiHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 1.25rem;
+    background: rgba(136, 192, 208, 0.1);
+    color: var(--color-accent-blue);
+}
+
+.aiHeader h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.aiContent {
+    padding: 1.25rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.assessmentBox {
+    background: var(--color-surface);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.assessmentBox h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-accent-blue);
+    margin-bottom: 0.75rem;
+}
+
+.assessmentBox p {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+}
+
+.classification {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.classLabel {
+    padding: 0.4rem 0.8rem;
+    background: rgba(191, 97, 106, 0.15);
+    color: var(--color-danger);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.confidence {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.threatGroups {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.threatGroup {
+    padding: 0.35rem 0.75rem;
+    background: var(--color-bg);
+    border: 1px solid rgba(136, 192, 208, 0.2);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: var(--color-text);
+}
+
+.skillMeter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.skillBar {
+    flex: 1;
+    height: 8px;
+    background: var(--color-bg);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.skillProgress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-accent-green), var(--color-warning));
+    border-radius: 4px;
+}
+
+.skillMeter span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent-blue);
+}
+
+.skillNote {
+    font-size: 0.8rem;
+    font-style: italic;
+}

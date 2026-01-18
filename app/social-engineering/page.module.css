@@ -1,0 +1,191 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.header p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+}
+
+.analyzerSection,
+.resultsSection {
+    background: var(--color-surface);
+    border-radius: 16px;
+    padding: 1.25rem;
+}
+
+.analyzerSection h2,
+.resultsSection h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.analyzerContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.emailInput {
+    width: 100%;
+    min-height: 150px;
+    padding: 1rem;
+    background: var(--color-bg);
+    border: 1px solid rgba(136, 192, 208, 0.2);
+    border-radius: 10px;
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: vertical;
+}
+
+.emailInput:focus {
+    outline: none;
+    border-color: var(--color-accent-blue);
+}
+
+.analyzeBtn {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    background: var(--color-accent-blue);
+    color: var(--color-bg);
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.resultsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.resultCard {
+    background: var(--color-bg);
+    border: 1px solid rgba(136, 192, 208, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.resultCard.phishing {
+    border-left: 3px solid var(--color-danger);
+}
+
+.resultCard.legitimate {
+    border-left: 3px solid var(--color-accent-green);
+}
+
+.resultCard.suspicious {
+    border-left: 3px solid var(--color-warning);
+}
+
+.resultHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(136, 192, 208, 0.1);
+}
+
+.resultInfo h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.sender {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+}
+
+.resultScore {
+    text-align: right;
+}
+
+.aiScore {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent-blue);
+}
+
+.aiLabel {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+}
+
+.resultBody {
+    padding: 1rem;
+}
+
+.verdictBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 0.75rem;
+}
+
+.verdictBadge.phishing {
+    background: rgba(191, 97, 106, 0.15);
+    color: var(--color-danger);
+}
+
+.verdictBadge.legitimate {
+    background: rgba(163, 190, 140, 0.15);
+    color: var(--color-accent-green);
+}
+
+.verdictBadge.suspicious {
+    background: rgba(235, 203, 139, 0.15);
+    color: var(--color-warning);
+}
+
+.reasons strong {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.reasons ul {
+    margin: 0.5rem 0 0 1.25rem;
+}
+
+.reasons li {
+    font-size: 0.85rem;
+    color: var(--color-text);
+    padding: 0.2rem 0;
+}

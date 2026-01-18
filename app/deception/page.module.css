@@ -1,0 +1,285 @@
+.deception {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.headerLeft h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.headerLeft p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+}
+
+.createBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    background: var(--color-accent-blue);
+    color: var(--color-bg);
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.createBtn:hover {
+    background: var(--color-accent-cyan);
+}
+
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: var(--color-surface);
+    border-radius: 12px;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.tab:hover {
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+.tab.active {
+    background: var(--color-accent-blue);
+    color: var(--color-bg);
+}
+
+.badge {
+    padding: 0.15rem 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.content {
+    background: var(--color-surface);
+    border-radius: 16px;
+    padding: 1.25rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.card {
+    background: var(--color-bg);
+    border: 1px solid rgba(136, 192, 208, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card.active {
+    border-left: 3px solid var(--color-accent-green);
+}
+
+.card.inactive {
+    opacity: 0.6;
+}
+
+.card.triggered {
+    border-left: 3px solid var(--color-danger);
+    background: rgba(191, 97, 106, 0.05);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(136, 192, 208, 0.1);
+}
+
+.cardHeader h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.statusBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.statusBadge.active {
+    background: rgba(163, 190, 140, 0.15);
+    color: var(--color-accent-green);
+}
+
+.statusBadge.inactive {
+    background: rgba(136, 192, 208, 0.1);
+    color: var(--color-text-muted);
+}
+
+.statusBadge.triggered {
+    background: rgba(191, 97, 106, 0.15);
+    color: var(--color-danger);
+}
+
+.statusBadge.waiting {
+    background: rgba(235, 203, 139, 0.15);
+    color: var(--color-warning);
+}
+
+.cardBody {
+    padding: 1rem;
+}
+
+.cardRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 0;
+    font-size: 0.85rem;
+}
+
+.cardRow span:first-child {
+    color: var(--color-text-muted);
+}
+
+.cardRow code {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 0.1rem 0.4rem;
+    background: var(--color-surface);
+    border-radius: 4px;
+}
+
+.hits {
+    font-weight: 700;
+    color: var(--color-accent-blue);
+}
+
+.cardActions {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid rgba(136, 192, 208, 0.1);
+}
+
+.cardActions button {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.75rem;
+    background: var(--color-surface);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.cardActions button:hover {
+    background: var(--color-accent-blue);
+    color: var(--color-bg);
+}
+
+.activityList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.activityItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-bg);
+    border-radius: 8px;
+    border-left: 3px solid transparent;
+}
+
+.activityItem.high {
+    border-left-color: var(--color-danger);
+}
+
+.activityItem.medium {
+    border-left-color: var(--color-warning);
+}
+
+.activityTime {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    min-width: 80px;
+}
+
+.activityAction {
+    flex: 1;
+    font-size: 0.85rem;
+    color: var(--color-text);
+}
+
+.activityIP {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+    background: var(--color-surface);
+    border-radius: 4px;
+}
+
+.severityBadge {
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.severityBadge.high {
+    background: rgba(191, 97, 106, 0.15);
+    color: var(--color-danger);
+}
+
+.severityBadge.medium {
+    background: rgba(235, 203, 139, 0.15);
+    color: var(--color-warning);
+}

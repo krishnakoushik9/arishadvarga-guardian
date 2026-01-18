@@ -1,0 +1,50 @@
+/* Nord Theme Palette */
+:root {
+  --color-bg: #2E3440;           /* Polar Night */
+  --color-surface: #3B4252;      /* Polar Night 2 */
+  --color-elevated: #434C5E;     /* Polar Night 3 */
+  --color-text: #ECEFF4;        /* Snow Storm */
+  --color-accent-blue: #88C0D0; /* Frost */
+  --color-accent-green: #A3BE8C;/* Aurora Green */
+  --color-warning: #EBCB8B;    /* Aurora Yellow */
+  --color-danger: #BF616A;     /* Aurora Red */
+  --color-purple: #B48EAD;     /* Aurora Purple */
+}
+
+/* Global resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--color-accent-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: var(--color-elevated);
+}

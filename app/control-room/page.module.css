@@ -1,0 +1,516 @@
+.controlRoom {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.headerLeft h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.headerLeft p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.liveIndicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-surface);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.liveDot {
+    width: 10px;
+    height: 10px;
+    background: var(--color-text-muted);
+    border-radius: 50%;
+}
+
+.liveDot.active {
+    background: var(--color-danger);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(191, 97, 106, 0.5);
+    }
+
+    50% {
+        opacity: 0.8;
+        box-shadow: 0 0 0 6px rgba(191, 97, 106, 0);
+    }
+}
+
+.actionBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-surface);
+    border: 1px solid rgba(136, 192, 208, 0.2);
+    border-radius: 8px;
+    color: var(--color-text);
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.actionBtn:hover {
+    background: var(--color-elevated);
+    border-color: var(--color-accent-blue);
+    color: var(--color-accent-blue);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: var(--color-surface);
+    border-radius: 12px;
+    flex-wrap: wrap;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tab:hover {
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+.tab.activeTab {
+    background: var(--color-accent-blue);
+    color: var(--color-bg);
+}
+
+.tabBadge {
+    padding: 0.15rem 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.activeTab .tabBadge {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.tabSpacer {
+    flex: 1;
+}
+
+.lastUpdate {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    padding-right: 0.5rem;
+}
+
+/* Content Area */
+.contentArea {
+    background: var(--color-surface);
+    border: 1px solid rgba(136, 192, 208, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.tableContainer {
+    overflow-x: auto;
+}
+
+.dataTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.dataTable th {
+    text-align: left;
+    padding: 1rem;
+    background: var(--color-bg);
+    color: var(--color-text-muted);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(136, 192, 208, 0.1);
+}
+
+.dataTable td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid rgba(136, 192, 208, 0.05);
+    color: var(--color-text);
+}
+
+.dataTable tbody tr {
+    transition: background 0.2s ease;
+}
+
+.dataTable tbody tr:hover {
+    background: rgba(136, 192, 208, 0.05);
+}
+
+.dataTable tbody tr.suspicious {
+    background: rgba(235, 203, 139, 0.08);
+}
+
+.dataTable tbody tr.malicious {
+    background: rgba(191, 97, 106, 0.12);
+}
+
+.mono {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+}
+
+.typeBadge {
+    padding: 0.25rem 0.6rem;
+    background: rgba(136, 192, 208, 0.15);
+    color: var(--color-accent-blue);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.statusBadge {
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.statusBadge.trusted,
+.statusBadge.normal {
+    background: rgba(163, 190, 140, 0.15);
+    color: var(--color-accent-green);
+}
+
+.statusBadge.suspicious,
+.statusBadge.active {
+    background: rgba(235, 203, 139, 0.15);
+    color: var(--color-warning);
+}
+
+.statusBadge.malicious {
+    background: rgba(191, 97, 106, 0.15);
+    color: var(--color-danger);
+}
+
+.actionBadge {
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.actionBadge.created {
+    background: rgba(191, 97, 106, 0.15);
+    color: var(--color-danger);
+}
+
+.actionBadge.modified {
+    background: rgba(235, 203, 139, 0.15);
+    color: var(--color-warning);
+}
+
+.actionBadge.accessed {
+    background: rgba(136, 192, 208, 0.15);
+    color: var(--color-accent-blue);
+}
+
+.protocolBadge {
+    padding: 0.25rem 0.6rem;
+    background: var(--color-bg);
+    color: var(--color-text-muted);
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Button with Icon */
+.actionBtnIcon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: var(--color-bg);
+    border: none;
+    border-radius: 6px;
+    color: var(--color-text-muted);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.actionBtnIcon:hover {
+    background: var(--color-accent-blue);
+    color: var(--color-bg);
+    transform: scale(1.1);
+}
+
+.cpuBar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100px;
+}
+
+.cpuBar span {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    min-width: 35px;
+}
+
+.cpuProgress {
+    flex: 1;
+    height: 6px;
+    background: var(--color-accent-green);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.cpuProgress.high {
+    background: var(--color-danger);
+}
+
+/* AI Panel */
+.aiPanel {
+    background: linear-gradient(135deg, rgba(191, 97, 106, 0.1), rgba(180, 142, 173, 0.1));
+    border: 1px solid rgba(191, 97, 106, 0.3);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.aiHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    background: rgba(191, 97, 106, 0.15);
+    color: var(--color-danger);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.aiContent {
+    padding: 1.25rem;
+}
+
+.aiContent p {
+    color: var(--color-text);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.aiContent strong {
+    color: var(--color-accent-blue);
+}
+
+.highlight {
+    background: rgba(191, 97, 106, 0.2);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    color: var(--color-danger);
+}
+
+.aiContent ul {
+    margin: 0.5rem 0 0 1.5rem;
+    color: var(--color-text-muted);
+}
+
+.aiContent li {
+    margin-bottom: 0.35rem;
+    font-size: 0.85rem;
+}
+
+/* Modal */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal {
+    background: var(--color-surface);
+    border: 1px solid rgba(136, 192, 208, 0.2);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(136, 192, 208, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.modalHeader h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.modalContent {
+    padding: 1.5rem;
+}
+
+/* Network Map */
+.networkMap {
+    background: var(--color-surface);
+    border: 1px solid rgba(136, 192, 208, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.mapHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.mapHeader h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.mapLegend {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.legendDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.mapVisual {
+    height: 250px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(136, 192, 208, 0.2);
+    color: var(--color-text-muted);
+    gap: 0.75rem;
+}
+
+.mapVisual p {
+    font-size: 0.9rem;
+}
+
+.mapStats {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    opacity: 0.8;
+}

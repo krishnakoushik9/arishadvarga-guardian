@@ -1,0 +1,426 @@
+.containment {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.headerLeft h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.headerLeft p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+}
+
+.headerStats {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: var(--color-surface);
+    border-radius: 12px;
+}
+
+.statValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent-blue);
+}
+
+.statLabel {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+/* Warning Banner */
+.warningBanner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: rgba(235, 203, 139, 0.1);
+    border: 1px solid rgba(235, 203, 139, 0.3);
+    border-radius: 12px;
+    color: var(--color-warning);
+    font-size: 0.9rem;
+}
+
+/* Actions Grid */
+.actionsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1rem;
+}
+
+.actionCard {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--color-surface);
+    border: 1px solid rgba(136, 192, 208, 0.1);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.actionCard:hover {
+    border-color: rgba(136, 192, 208, 0.3);
+    transform: translateY(-2px);
+}
+
+.actionCard.executed {
+    opacity: 0.7;
+    background: rgba(163, 190, 140, 0.05);
+    border-color: rgba(163, 190, 140, 0.2);
+}
+
+.actionCard.active {
+    background: rgba(235, 203, 139, 0.05);
+    border-color: rgba(235, 203, 139, 0.3);
+}
+
+.actionCard.highRisk {
+    border-left: 3px solid var(--color-danger);
+}
+
+.actionCard.mediumRisk {
+    border-left: 3px solid var(--color-warning);
+}
+
+.actionCard.lowRisk {
+    border-left: 3px solid var(--color-accent-green);
+}
+
+.actionIcon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(136, 192, 208, 0.1);
+    border-radius: 12px;
+    color: var(--color-accent-blue);
+    flex-shrink: 0;
+}
+
+.actionInfo {
+    flex: 1;
+}
+
+.actionInfo h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.35rem;
+}
+
+.actionInfo p {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+}
+
+.actionMeta {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.riskBadge {
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.riskBadge.low {
+    background: rgba(163, 190, 140, 0.15);
+    color: var(--color-accent-green);
+}
+
+.riskBadge.medium {
+    background: rgba(235, 203, 139, 0.15);
+    color: var(--color-warning);
+}
+
+.riskBadge.high {
+    background: rgba(191, 97, 106, 0.15);
+    color: var(--color-danger);
+}
+
+.reversibleBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem 0.5rem;
+    background: rgba(136, 192, 208, 0.1);
+    color: var(--color-accent-blue);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.actionButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+.executeBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-accent-blue);
+    color: var(--color-bg);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.executeBtn:hover {
+    background: var(--color-accent-cyan);
+    transform: scale(1.05);
+}
+
+.activeBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    background: rgba(235, 203, 139, 0.15);
+    color: var(--color-warning);
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.executedBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    background: rgba(163, 190, 140, 0.15);
+    color: var(--color-accent-green);
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.revertBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    background: transparent;
+    border: 1px solid rgba(136, 192, 208, 0.3);
+    color: var(--color-text-muted);
+    border-radius: 8px;
+    font-size: 0.75rem;
+}
+
+.revertBtn:hover {
+    border-color: var(--color-accent-blue);
+    color: var(--color-accent-blue);
+}
+
+/* Log Section */
+.logSection {
+    background: var(--color-surface);
+    border-radius: 16px;
+    padding: 1.25rem;
+}
+
+.logSection h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(136, 192, 208, 0.1);
+}
+
+.logList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.logItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: var(--color-bg);
+    border-radius: 8px;
+}
+
+.logTime {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    min-width: 80px;
+}
+
+.logAction {
+    flex: 1;
+    font-size: 0.85rem;
+    color: var(--color-text);
+}
+
+.logUser {
+    font-size: 0.8rem;
+    color: var(--color-accent-blue);
+    min-width: 60px;
+}
+
+.logStatus {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logStatus.success {
+    color: var(--color-accent-green);
+}
+
+.logStatus.warning {
+    color: var(--color-warning);
+}
+
+/* Modal */
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    width: 100%;
+    max-width: 450px;
+    background: var(--color-surface);
+    border: 1px solid rgba(136, 192, 208, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    animation: modalIn 0.3s ease;
+}
+
+@keyframes modalIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modalHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    background: rgba(235, 203, 139, 0.1);
+    color: var(--color-warning);
+}
+
+.modalHeader h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.modalContent {
+    padding: 1.25rem;
+}
+
+.modalContent p {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+}
+
+.modalWarning {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+}
+
+.modalActions {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1.25rem;
+    border-top: 1px solid rgba(136, 192, 208, 0.1);
+}
+
+.cancelBtn {
+    flex: 1;
+    padding: 0.75rem;
+    background: var(--color-bg);
+    border: 1px solid rgba(136, 192, 208, 0.2);
+    color: var(--color-text-muted);
+    border-radius: 10px;
+}
+
+.confirmBtn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: var(--color-accent-blue);
+    color: var(--color-bg);
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.confirmBtn:hover {
+    background: var(--color-accent-cyan);
+}

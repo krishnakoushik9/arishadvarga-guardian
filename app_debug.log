@@ -1,0 +1,13 @@
+[254705:0118/141402.092118:ERROR:ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc:251] '--ozone-platform=wayland' is not compatible with Vulkan. Consider switching to '--ozone-platform=x11' or disabling Vulkan
+Starting server from: /tmp/.mount_ArishamNi38w/resources/app-server/Desktop/Cyber/arishadvarga-guardian/node_modules/next/dist/experimental/testmode/server.js
+(node:254649) UnhandledPromiseRejectionWarning: TypeError [ERR_INVALID_ARG_VALUE]: The argument 'stdio' is invalid. Received 'file'
+    at stdioStringToArray (node:internal/child_process:247:13)
+    at getValidStdio (node:internal/child_process:990:13)
+    at ChildProcess.spawn (node:internal/child_process:363:11)
+    at spawn (node:child_process:810:9)
+    at startServer (/tmp/.mount_ArishamNi38w/resources/app.asar/electron/main.js:92:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async EventEmitter.createWindow (/tmp/.mount_ArishamNi38w/resources/app.asar/electron/main.js:40:9)
+(Use `arishadvarga-guardian --trace-warnings ...` to show where the warning was created)
+(node:254649) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+[254649:0118/141402.367305:ERROR:dbus/object_proxy.cc:573] Failed to call method: org.freedesktop.systemd1.Manager.StartTransientUnit: object_path= /org/freedesktop/systemd1: org.freedesktop.systemd1.UnitExists: Unit app-org.chromium.Chromium-254649.scope was already loaded or has a fragment file.

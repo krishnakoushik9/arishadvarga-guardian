@@ -1,0 +1,345 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal {
+    width: 100%;
+    max-width: 500px;
+    background: var(--color-surface);
+    border: 1px solid rgba(136, 192, 208, 0.2);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.closeBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg);
+    border-radius: 50%;
+    color: var(--color-text-muted);
+    padding: 0;
+    z-index: 10;
+}
+
+.closeBtn:hover {
+    background: var(--color-danger);
+    color: white;
+}
+
+/* Step Indicator */
+.stepIndicator {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1.5rem;
+    background: var(--color-bg);
+    border-bottom: 1px solid rgba(136, 192, 208, 0.1);
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.4;
+}
+
+.step span {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.step p {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.step.active {
+    opacity: 1;
+}
+
+.step.active span {
+    background: var(--color-accent-blue);
+    border-color: var(--color-accent-blue);
+    color: var(--color-bg);
+}
+
+.step.completed {
+    opacity: 1;
+}
+
+.step.completed span {
+    background: var(--color-accent-green);
+    border-color: var(--color-accent-green);
+    color: var(--color-bg);
+}
+
+/* Content */
+.content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.mainIcon {
+    color: var(--color-accent-blue);
+    margin-bottom: 1rem;
+}
+
+.successIcon {
+    color: var(--color-accent-green);
+    margin-bottom: 1rem;
+}
+
+.content h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+}
+
+.content>p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.stepInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--color-bg);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+
+.stepInfo svg {
+    color: var(--color-accent-blue);
+}
+
+.primaryBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.875rem;
+    background: var(--color-accent-blue);
+    color: var(--color-bg);
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.primaryBtn:hover {
+    background: var(--color-accent-cyan);
+}
+
+.primaryBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Upload */
+.hiddenInput {
+    display: none;
+}
+
+.uploadBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    height: 180px;
+    background: var(--color-bg);
+    border: 2px dashed rgba(136, 192, 208, 0.3);
+    border-radius: 16px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 1rem;
+}
+
+.uploadBtn:hover {
+    border-color: var(--color-accent-blue);
+    color: var(--color-accent-blue);
+}
+
+.previewContainer {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.preview {
+    width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 1px solid rgba(136, 192, 208, 0.2);
+}
+
+.retakeBtn {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.75rem;
+    background: var(--color-bg);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+/* Webcam */
+.webcamContainer {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.video {
+    width: 100%;
+    border-radius: 12px;
+    background: var(--color-bg);
+}
+
+.captureBtn {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-danger);
+    border-radius: 50%;
+    color: white;
+    padding: 0;
+    border: 3px solid white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hiddenCanvas {
+    display: none;
+}
+
+/* Puzzle */
+.puzzleBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--color-bg);
+    border-radius: 16px;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.puzzleQuestion {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent-blue);
+    font-family: var(--font-mono);
+}
+
+.puzzleInput {
+    width: 120px;
+    padding: 0.75rem;
+    background: var(--color-surface);
+    border: 2px solid rgba(136, 192, 208, 0.3);
+    border-radius: 10px;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    font-family: var(--font-mono);
+}
+
+.puzzleInput:focus {
+    outline: none;
+    border-color: var(--color-accent-blue);
+}
+
+/* Error */
+.error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(191, 97, 106, 0.1);
+    border-radius: 8px;
+    color: var(--color-danger);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+}

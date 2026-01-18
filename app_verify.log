@@ -1,0 +1,10 @@
+[259803:0118/141940.818632:ERROR:ui/ozone/platform/wayland/gpu/wayland_surface_factory.cc:251] '--ozone-platform=wayland' is not compatible with Vulkan. Consider switching to '--ozone-platform=x11' or disabling Vulkan
+Starting server from: /tmp/.mount_ArishaKkIjOq/resources/app-server/Desktop/Cyber/arishadvarga-guardian/dist/linux-unpacked/resources/app-server/Desktop/Cyber/arishadvarga-guardian/server.js
+[259713:0118/141941.511946:ERROR:dbus/object_proxy.cc:573] Failed to call method: org.freedesktop.systemd1.Manager.StartTransientUnit: object_path= /org/freedesktop/systemd1: org.freedesktop.systemd1.UnitExists: Unit app-org.chromium.Chromium-259713.scope was already loaded or has a fragment file.
+▲ Next.js 16.1.3
+- Local:         http://localhost:8000
+- Network:       http://localhost:8000
+
+✓ Starting...
+Error: Could not find a production build in the './.next' directory. Try building your app with 'next build' before starting the production server. https://nextjs.org/docs/messages/production-start-no-build-id
+    at ignore-listed frames

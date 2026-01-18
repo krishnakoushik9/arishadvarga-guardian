@@ -1,0 +1,338 @@
+.forensics {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    z-index: 1000;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.notification.success {
+    background: rgba(163, 190, 140, 0.95);
+    color: var(--color-bg);
+}
+
+.notification.error {
+    background: rgba(191, 97, 106, 0.95);
+    color: white;
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.severityHigh {
+    color: var(--color-danger);
+    font-weight: bold;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.headerLeft h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.headerLeft p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+}
+
+.headerActions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.exportBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: var(--color-accent-blue);
+    color: var(--color-bg);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.exportBtn:hover {
+    background: var(--color-accent-cyan);
+}
+
+.mainGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .mainGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.timelineSection,
+.evidenceSection {
+    background: var(--color-surface);
+    border-radius: 16px;
+    padding: 1.25rem;
+}
+
+.timelineSection h2,
+.evidenceSection h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(136, 192, 208, 0.1);
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.timelineItem {
+    position: relative;
+    padding: 0.75rem 0 0.75rem 1.5rem;
+    border-left: 2px solid var(--color-border);
+}
+
+.timelineItem:last-child {
+    border-left-color: transparent;
+}
+
+.timelineDot {
+    position: absolute;
+    left: -7px;
+    top: 1rem;
+    width: 12px;
+    height: 12px;
+    background: var(--color-surface);
+    border: 2px solid var(--color-accent-blue);
+    border-radius: 50%;
+}
+
+.timelineItem.critical .timelineDot {
+    border-color: var(--color-danger);
+    background: var(--color-danger);
+}
+
+.timelineItem.warning .timelineDot {
+    border-color: var(--color-warning);
+    background: var(--color-warning);
+}
+
+.timelineItem.info .timelineDot {
+    border-color: var(--color-accent-blue);
+}
+
+.timelineContent {
+    background: var(--color-bg);
+    padding: 0.75rem;
+    border-radius: 8px;
+}
+
+.timelineTime {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.timelineEvent {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    margin: 0.25rem 0;
+}
+
+.timelineSource {
+    font-size: 0.75rem;
+    color: var(--color-accent-blue);
+}
+
+.evidenceList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.evidenceItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: var(--color-bg);
+    border-radius: 8px;
+}
+
+.evidenceItem.collected {
+    border-left: 3px solid var(--color-accent-green);
+}
+
+.evidenceInfo {
+    flex: 1;
+}
+
+.evidenceName {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.evidenceType {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.evidenceMeta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-end;
+}
+
+.evidenceHash {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+}
+
+.evidenceSize {
+    font-size: 0.75rem;
+    color: var(--color-accent-blue);
+}
+
+.collectedBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.collectedBadge.yes {
+    background: rgba(163, 190, 140, 0.15);
+    color: var(--color-accent-green);
+}
+
+.collectedBadge.no {
+    background: rgba(235, 203, 139, 0.15);
+    color: var(--color-warning);
+}
+
+.reportPreview {
+    background: linear-gradient(135deg, rgba(136, 192, 208, 0.1), rgba(163, 190, 140, 0.1));
+    border: 1px solid rgba(136, 192, 208, 0.2);
+    border-radius: 16px;
+    padding: 1.25rem;
+}
+
+.reportPreview h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.reportContent {
+    background: var(--color-surface);
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.reportContent h3 {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+}
+
+.reportContent p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.reportContent strong {
+    color: var(--color-accent-blue);
+}
+
+.reportContent ul {
+    margin: 0.5rem 0 0 1.5rem;
+    color: var(--color-text-muted);
+}
+
+.reportContent li {
+    margin-bottom: 0.35rem;
+    font-size: 0.85rem;
+}
