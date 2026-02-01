@@ -506,6 +506,17 @@ arishadvarga-guardian/
 
 ---
 
+### ✅ Authorized Users
+
+The following users have been granted permission to use this project:
+
+| User | Status | Granted By |
+|------|--------|------------|
+| [@krishnakoushik9](https://github.com/krishnakoushik9) | 👑 Owner & Admin | - |
+| [@ThrithiReddy](https://github.com/ThrithiReddy) | ✅ Authorized User | [@krishnakoushik9](https://github.com/krishnakoushik9) |
+
+---
+
 ### 🚫 This Repository:
 - **CANNOT** be claimed by any individual or organization
 - **CANNOT** be forked for redistribution without explicit written permission
