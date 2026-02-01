@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Wrench, Search, Play, Lock, Unlock, CheckCircle, XCircle, AlertTriangle, Terminal, Eye, ExternalLink, Loader2 } from 'lucide-react';
 import styles from './page.module.css';
 
-type ToolCategory = 'network' | 'vuln' | 'password' | 'exploit' | 'forensics' | 'wireless' | 'web' | 'social';
+type ToolCategory = 'network' | 'vuln' | 'password' | 'exploit' | 'forensics' | 'wireless' | 'web' | 'social' | 'c2' | 'recon';
 
 interface Tool {
     name: string;
@@ -138,6 +138,106 @@ const tools: Tool[] = [
         docsUrl: 'https://www.kismetwireless.net/docs/',
         installCommand: 'sudo apt install kismet -y'
     },
+    {
+        name: 'Sliver',
+        description: 'Modern C2 framework (Nation-State)',
+        category: 'c2',
+        installed: false,
+        offensive: true,
+        command: 'sliver-server',
+        docsUrl: 'https://github.com/BishopFox/sliver',
+        installCommand: 'curl -L https://github.com/BishopFox/sliver/releases/latest/download/sliver-server_linux -o sliver && chmod +x sliver && sudo mv sliver /usr/local/bin/'
+    },
+    {
+        name: 'CrackMapExec',
+        description: 'Lateral movement, credential spraying, AD abuse',
+        category: 'exploit',
+        installed: false,
+        offensive: true,
+        command: 'crackmapexec',
+        docsUrl: 'https://github.com/byt3bl33d3r/CrackMapExec',
+        installCommand: 'pip install crackmapexec'
+    },
+    {
+        name: 'Responder',
+        description: 'LLMNR/NBT-NS poisoning & credential interception',
+        category: 'network',
+        installed: false,
+        offensive: true,
+        command: 'responder -I eth0',
+        docsUrl: 'https://github.com/lgandx/Responder',
+        installCommand: 'sudo apt install responder -y'
+    },
+    {
+        name: 'Empire',
+        description: 'Post-exploitation & PowerShell attacks',
+        category: 'exploit',
+        installed: false,
+        offensive: true,
+        command: 'empire',
+        docsUrl: 'https://github.com/EmpireProject/Empire',
+        installCommand: 'git clone https://github.com/BC-SECURITY/Empire.git && cd Empire && sudo ./setup/install.sh'
+    },
+    {
+        name: 'Mimikatz',
+        description: 'Credential extraction from memory',
+        category: 'password',
+        installed: false,
+        offensive: true,
+        command: 'mimikatz',
+        docsUrl: 'https://github.com/gentilkiwi/mimikatz',
+        installCommand: 'Download from https://github.com/gentilkiwi/mimikatz/releases'
+    },
+    {
+        name: 'Amass',
+        description: 'Attack surface mapping & OSINT reconnaissance',
+        category: 'recon',
+        installed: false,
+        offensive: true,
+        command: 'amass enum -d example.com',
+        docsUrl: 'https://github.com/owasp-amass/amass',
+        installCommand: 'sudo apt install amass -y'
+    },
+    {
+        name: 'ffuf',
+        description: 'High-speed web endpoint fuzzing',
+        category: 'web',
+        installed: false,
+        offensive: true,
+        command: 'ffuf -u http://target/FUZZ -w wordlist.txt',
+        docsUrl: 'https://github.com/ffuf/ffuf',
+        installCommand: 'go install github.com/ffuf/ffuf@latest'
+    },
+    {
+        name: 'TruffleHog',
+        description: 'Secret & credential discovery in Git repos',
+        category: 'password',
+        installed: false,
+        offensive: true,
+        command: 'trufflehog git https://github.com/target/repo',
+        docsUrl: 'https://github.com/trufflesecurity/trufflehog',
+        installCommand: 'pip install trufflehog'
+    },
+    {
+        name: 'Ghidra',
+        description: 'Malware reverse engineering & binary analysis',
+        category: 'forensics',
+        installed: false,
+        offensive: false,
+        command: 'ghidra',
+        docsUrl: 'https://ghidra-sre.org/',
+        installCommand: 'Download from https://ghidra-sre.org/'
+    },
+    {
+        name: 'YARA',
+        description: 'Malware detection via pattern matching rules',
+        category: 'forensics',
+        installed: false,
+        offensive: false,
+        command: 'yara -r rules.yar /path/to/scan',
+        docsUrl: 'https://virustotal.github.io/yara/',
+        installCommand: 'sudo apt install yara -y'
+    },
 ];
 
 const categoryLabels: Record<ToolCategory, string> = {
@@ -149,6 +249,8 @@ const categoryLabels: Record<ToolCategory, string> = {
     wireless: 'Wireless Security',
     web: 'Web Application',
     social: 'Social Engineering',
+    c2: 'Command & Control',
+    recon: 'Reconnaissance'
 };
 
 // ... (imports)
@@ -327,6 +429,11 @@ export default function Tools() {
 
     // Install tool
     const handleInstall = async (tool: Tool) => {
+        if (tool.offensive && !offensiveUnlocked) {
+            showNotification('error', 'Offensive tools are locked. Complete verification to unlock.');
+            return;
+        }
+
         if (!tool.installCommand) {
             showNotification('error', 'No install command available for this tool.');
             return;
@@ -599,7 +706,7 @@ To get full AI analysis, configure your Gemini API key in Settings.`);
                                 <button
                                     className={styles.installBtn}
                                     onClick={() => handleInstall(tool)}
-                                    disabled={launchingTool === tool.name}
+                                    disabled={(tool.offensive && !offensiveUnlocked) || launchingTool === tool.name}
                                 >
                                     {launchingTool === tool.name ? 'Installing...' : 'Install Tool'}
                                 </button>

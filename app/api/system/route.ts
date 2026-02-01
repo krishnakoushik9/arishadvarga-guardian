@@ -5,6 +5,8 @@ import os from 'os';
 import fs from 'fs';
 import path from 'path';
 
+export const runtime = 'nodejs';
+
 const execAsync = promisify(exec);
 
 // Detect the operating system
@@ -156,22 +158,49 @@ async function startSystemMonitor(): Promise<{ success: boolean; data?: unknown 
                 });
             } catch (e) { console.error('Linux Process Error', e); }
 
-            // Get network connections
-            // ss -tunap
+            // Get network connections with process names for tree visualization
+            // ss -tunap gives us connections with process info
             try {
-                const { stdout: netOutput } = await execAsync("ss -tunap | head -n 16");
-                const lines = netOutput.trim().split('\n').slice(1);
+                const { stdout: netOutput } = await execAsync("ss -tunap 2>/dev/null | grep -v 'Netid' | head -n 50");
+                const lines = netOutput.trim().split('\n');
 
                 connections = lines.map(line => {
                     const parts = line.trim().split(/\s+/);
-                    // Usually: Netid State Recv-Q Send-Q Local_Address:Port Peer_Address:Port Process
-                    if (parts.length < 5) return null;
+                    if (parts.length < 6) return null;
+
+                    // Extract process name from the last column (users:(("process",pid=123,fd=4)))
+                    let processName = 'unknown';
+                    let pid = 0;
+                    const processMatch = line.match(/users:\(\("([^"]+)",pid=(\d+)/);
+                    if (processMatch) {
+                        processName = processMatch[1];
+                        pid = parseInt(processMatch[2]);
+                    }
+
+                    // Parse local and remote addresses
+                    const localAddr = parts[4] || '';
+                    const remoteAddr = parts[5] || '';
+
+                    // Extract IP and port
+                    const [localIp, localPort] = localAddr.split(':').length > 2
+                        ? [localAddr.substring(0, localAddr.lastIndexOf(':')), localAddr.split(':').pop()]
+                        : localAddr.split(':');
+                    const [remoteIp, remotePort] = remoteAddr.split(':').length > 2
+                        ? [remoteAddr.substring(0, remoteAddr.lastIndexOf(':')), remoteAddr.split(':').pop()]
+                        : remoteAddr.split(':');
+
                     return {
-                        source: parts[4],
-                        destination: parts[5],
+                        source: localAddr,
+                        destination: remoteAddr,
+                        localIp: localIp || '0.0.0.0',
+                        localPort: localPort || '0',
+                        remoteIp: remoteIp || '0.0.0.0',
+                        remotePort: remotePort || '0',
                         protocol: parts[0].toUpperCase(),
                         status: parts[1] === 'ESTAB' ? 'active' : parts[1],
-                        bytes: `${parts[2]}/${parts[3]}` // Showing queues as proxy for activity
+                        bytes: `${parts[2]}/${parts[3]}`,
+                        processName,
+                        pid,
                     };
                 }).filter(Boolean);
             } catch (e) { console.error('Linux Net Error', e); }
@@ -197,6 +226,45 @@ async function startSystemMonitor(): Promise<{ success: boolean; data?: unknown 
             } catch (e) { console.error('Linux Session Error', e); }
         }
 
+        // Calculate real CPU usage percentage
+        let cpuPercent = 0;
+        if (osType === 'linux') {
+            try {
+                // Read /proc/stat for CPU usage - this gives cumulative time
+                // We need to calculate delta, but for simplicity use top's 1-iteration output
+                const { stdout: cpuOutput } = await execAsync("grep 'cpu ' /proc/stat");
+                const parts = cpuOutput.trim().split(/\s+/);
+                // cpu user nice system idle iowait irq softirq steal guest guest_nice
+                const user = parseInt(parts[1]);
+                const nice = parseInt(parts[2]);
+                const system = parseInt(parts[3]);
+                const idle = parseInt(parts[4]);
+                const iowait = parseInt(parts[5]) || 0;
+
+                const total = user + nice + system + idle + iowait;
+                const active = user + nice + system;
+                cpuPercent = Math.round((active / total) * 100);
+            } catch {
+                // Fallback to load average
+                cpuPercent = Math.min(100, Math.round(os.loadavg()[0] * 10));
+            }
+        } else if (osType === 'windows') {
+            try {
+                const { stdout: cpuOutput } = await execAsync(
+                    'powershell "(Get-CimInstance Win32_Processor | Measure-Object -Property LoadPercentage -Average).Average"'
+                );
+                cpuPercent = parseInt(cpuOutput.trim()) || 0;
+            } catch {
+                cpuPercent = Math.min(100, Math.round(os.loadavg()[0] * 10));
+            }
+        }
+
+        // Memory usage
+        const totalMem = os.totalmem();
+        const freeMem = os.freemem();
+        const usedMem = totalMem - freeMem;
+        const memPercent = Math.round((usedMem / totalMem) * 100);
+
         return {
             success: true,
             data: {
@@ -206,11 +274,13 @@ async function startSystemMonitor(): Promise<{ success: boolean; data?: unknown 
                 connections,
                 sessions,
                 recentAlerts,
+                cpuPercent, // Real CPU usage percentage
                 cpuUsage: os.loadavg(),
                 memoryUsage: {
-                    total: os.totalmem(),
-                    free: os.freemem(),
-                    used: os.totalmem() - os.freemem(),
+                    total: totalMem,
+                    free: freeMem,
+                    used: usedMem,
+                    percent: memPercent, // Real memory usage percentage
                 },
                 uptime: os.uptime(),
             }

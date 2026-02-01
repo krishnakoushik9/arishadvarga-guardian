@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import {
     Activity,
     Terminal,
@@ -19,7 +20,11 @@ import {
 } from 'lucide-react';
 import styles from './page.module.css';
 
-// ... imports
+// Dynamic import for D3 graph (client-side only)
+const NetworkGraph = dynamic(() => import('./NetworkGraph'), {
+    ssr: false,
+    loading: () => <div className={styles.graphLoading}>Loading graph...</div>
+});
 
 export default function ControlRoom() {
     const [activeTab, setActiveTab] = useState<'sessions' | 'processes' | 'files' | 'connections'>('sessions');
@@ -86,14 +91,10 @@ export default function ControlRoom() {
                 setSessions(data.data.sessions || []);
                 setProcesses(data.data.processes || []);
                 setConnections(data.data.connections || []);
-                // recentAlerts could map to fileChanges or separate alerts, 
-                // for now let's keep fileChanges separate or fetch distinct if needed.
-                // Re-using file fetching if needed or just simulate for now as 'file monitoring' in background is heavy
+
             }
 
-            // Separate fetch for file changes to keep payloads light? 
-            // Or just keep mock for files if not critical, but user asked for "track current sessions...".
-            // Let's fetch file changes too.
+            // Fetch file changes
             const fileRes = await fetch('/api/system', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -101,9 +102,6 @@ export default function ControlRoom() {
             });
             const fileData = await fileRes.json();
             if (fileData.success) {
-                // Map to UI format
-                // Windows returns: FullName, LastWriteTime
-                // Linux returns: path string
                 const formattedFiles = Array.isArray(fileData.data) ? fileData.data.map((f: any, i: number) => ({
                     path: typeof f === 'string' ? f : f.FullName,
                     action: 'modified',
@@ -150,31 +148,35 @@ export default function ControlRoom() {
                 </div>
             </div>
 
-            {/* Network Map */}
+            {/* Network Activity Graph */}
             <div className={styles.networkMap}>
                 <div className={styles.mapHeader}>
                     <h3><Network size={18} /> Network Activity Map</h3>
                     <div className={styles.mapLegend}>
                         <div className={styles.legendItem}>
+                            <div className={styles.legendDot} style={{ background: '#88c0d0' }} />
+                            <span>This Device</span>
+                        </div>
+                        <div className={styles.legendItem}>
                             <div className={styles.legendDot} style={{ background: '#a3be8c' }} />
-                            <span>Normal</span>
+                            <span>Process</span>
                         </div>
                         <div className={styles.legendItem}>
                             <div className={styles.legendDot} style={{ background: '#ebcb8b' }} />
-                            <span>Suspicious</span>
-                        </div>
-                        <div className={styles.legendItem}>
-                            <div className={styles.legendDot} style={{ background: '#bf616a' }} />
-                            <span>Threat</span>
+                            <span>Remote Server</span>
                         </div>
                     </div>
                 </div>
-                <div className={styles.mapVisual}>
-                    <Network size={48} style={{ opacity: 0.5 }} />
-                    <p>Real-time network topology visualization</p>
-                    <div className={styles.mapStats}>
-                        Monitoring <strong>{processes.length}</strong> processes • <strong>{connections.length}</strong> connections active
-                    </div>
+
+                {/* D3 Force-Directed Network Graph */}
+                <NetworkGraph connections={connections} />
+
+                <div className={styles.graphStats}>
+                    <span><strong>{processes.length}</strong> processes</span>
+                    <span>•</span>
+                    <span><strong>{connections.length}</strong> connections</span>
+                    <span>•</span>
+                    <span><strong>{[...new Set(connections.map((c: any) => c.remoteIp))].length}</strong> remote servers</span>
                 </div>
             </div>
 

@@ -1,0 +1,291 @@
+/* ================================
+   D3 NETWORK GRAPH (OBSIDIAN-STYLE)
+================================ */
+
+.networkGraphContainer {
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 14px;
+    padding: 0.5rem;
+    border: 1px solid rgba(136, 192, 208, 0.12);
+    /* overflow: hidden; Removed to allow modal popover */
+    contain: layout paint;
+    min-height: 450px;
+    position: relative;
+    /* Important for modal positioning */
+}
+
+.networkGraph {
+    width: 100%;
+    height: 450px;
+    display: block;
+    cursor: grab;
+}
+
+.networkGraph:active {
+    cursor: grabbing;
+}
+
+/* ================================
+   LINKS (CURVED PATHS)
+================================ */
+
+.networkGraph path {
+    fill: none;
+    stroke-linecap: round;
+    transition: stroke-opacity 0.25s ease;
+    pointer-events: none;
+}
+
+.networkGraph path.process {
+    stroke: rgba(136, 192, 208, 0.5);
+    stroke-width: 2;
+}
+
+.networkGraph path.remote {
+    stroke: rgba(235, 203, 139, 0.4);
+    stroke-width: 1.5;
+    stroke-dasharray: 4, 2;
+}
+
+/* ================================
+   NODES
+================================ */
+
+.networkGraph .node {
+    cursor: pointer;
+}
+
+.networkGraph .node circle {
+    transition: filter 0.2s ease, r 0.15s ease;
+}
+
+.networkGraph .node.device circle {
+    filter: drop-shadow(0 0 8px rgba(136, 192, 208, 0.6));
+}
+
+.networkGraph .node.process circle {
+    filter: drop-shadow(0 0 5px rgba(163, 190, 140, 0.5));
+}
+
+.networkGraph .node.remote circle {
+    filter: drop-shadow(0 0 4px rgba(235, 203, 139, 0.4));
+}
+
+/* Hover effects */
+.networkGraph .node:hover circle {
+    filter: drop-shadow(0 0 12px rgba(136, 192, 208, 0.9));
+}
+
+.networkGraph .node.process:hover circle {
+    filter: drop-shadow(0 0 10px rgba(163, 190, 140, 0.85));
+}
+
+.networkGraph .node.remote:hover circle {
+    filter: drop-shadow(0 0 8px rgba(235, 203, 139, 0.8));
+}
+
+/* ================================
+   TEXT LABELS
+================================ */
+
+.networkGraph text {
+    font-family: var(--font-mono), monospace;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ================================
+   PERFORMANCE
+================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .networkGraph .node circle,
+    .networkGraph path {
+        transition: none;
+    }
+}
+
+/* ================================
+   IP ENRICHMENT MODAL
+================================ */
+
+.enrichmentModal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.enrichmentContent {
+    background: rgba(36, 42, 54, 0.85);
+    /* Semi-transparent */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(136, 192, 208, 0.3);
+    border-radius: 12px;
+    padding: 1.25rem;
+    min-width: 300px;
+    max-width: 380px;
+    max-height: 400px;
+    /* Constrain height */
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.enrichmentContent h3 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1rem;
+    color: #eceff4;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    color: rgba(236, 239, 244, 0.6);
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem;
+    transition: color 0.2s;
+}
+
+.closeBtn:hover {
+    color: #bf616a;
+}
+
+.enrichmentIp {
+    font-family: var(--font-mono, monospace);
+    font-size: 1.1rem;
+    color: #88c0d0;
+    background: rgba(136, 192, 208, 0.1);
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    text-align: center;
+    border: 1px dashed rgba(136, 192, 208, 0.3);
+}
+
+.enrichmentLoading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    color: rgba(236, 239, 244, 0.7);
+    font-size: 0.9rem;
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(136, 192, 208, 0.3);
+    border-top-color: #88c0d0;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.enrichmentData {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.enrichmentRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(136, 192, 208, 0.1);
+}
+
+.enrichmentRow:last-child {
+    border-bottom: none;
+}
+
+.enrichmentLabel {
+    font-size: 0.75rem;
+    color: rgba(236, 239, 244, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.enrichmentValue {
+    font-size: 0.9rem;
+    color: #eceff4;
+    font-family: var(--font-mono, monospace);
+    text-align: right;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.enrichmentValue.high {
+    color: #a3be8c;
+}
+
+.enrichmentValue.medium {
+    color: #ebcb8b;
+}
+
+.enrichmentValue.low {
+    color: #bf616a;
+}
+
+.enrichmentNotes {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: rgba(236, 239, 244, 0.8);
+    line-height: 1.5;
+    border-left: 3px solid #88c0d0;
+}

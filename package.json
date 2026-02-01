@@ -1,11 +1,14 @@
 {
   "name": "arishadvarga-guardian",
   "version": "0.1.0",
+  "description": "Cybersecurity Incident Response Platform",
+  "homepage": "https://github.com/krsna/arishadvarga-guardian",
+  "author": "krsna <krsna@localhost>",
   "private": true,
   "main": "electron/main.js",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "electron:dev": "concurrently -k \"cross-env BROWSER=none npm run dev\" \"wait-on http://localhost:3000 && electron .\"",
@@ -13,6 +16,10 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
+    "@types/d3": "^7.4.3",
+    "cors": "^2.8.5",
+    "d3": "^7.9.0",
+    "express": "^5.2.1",
     "jspdf": "^4.0.0",
     "jszip": "^3.10.1",
     "lucide-react": "^0.562.0",
@@ -24,6 +31,7 @@
     "react-webcam": "^7.2.0",
     "recharts": "^3.6.0",
     "remark-gfm": "^4.0.1",
+    "ssh2": "^1.17.0",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
@@ -67,7 +75,8 @@
     },
     "linux": {
       "target": [
-        "AppImage"
+        "AppImage",
+        "deb"
       ],
       "icon": "public/icon.png",
       "category": "Utility"
